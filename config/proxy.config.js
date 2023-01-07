@@ -1,4 +1,4 @@
 //The URL of this server
-const proxy = "http://localhost:8005";
+const proxy = process.env.PROXY;
 
 module.exports = proxy;
