@@ -5,7 +5,9 @@ const cors = require("cors");
 const port = 8005;
 const bodyParser = require("body-parser");
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://www.wwidev.tech'
+}));
 
 app.use(bodyParser.json());
 require("dotenv").config();
