@@ -9,6 +9,7 @@ app.use(cors({
   origin: 'https://www.wwidev.tech'
 }));
 
+
 app.use(bodyParser.json());
 require("dotenv").config();
 
