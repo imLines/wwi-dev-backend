@@ -5,8 +5,6 @@
 
 ---
 
-# 👋🏻 Welcome to wwiDEV API 👋🏻
-
 This API has been developed to be accessed by web and mobile. It was developed respecting the MVC model.
 This API is intended to work with [wwiDEV Frontend](https://github.com/imLines/wwi-dev-frontend)_ on a VPS.
 
