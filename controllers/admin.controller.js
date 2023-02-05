@@ -27,7 +27,7 @@ exports.login = (req, res) => {
             );
             return res
               .status(400)
-              .send({ message: "Invalid email / password." });
+              .send({message: "Invalid email / password."});
           }
         });
       } else {
@@ -37,7 +37,7 @@ exports.login = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " admin controller => login : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -72,7 +72,7 @@ exports.create = (req, res) => {
     }
   } catch (e) {
     logger.log("error", "admin controller => create : " + e);
-    res.status(500).send({ message: "Error : " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -97,7 +97,7 @@ exports.getInformations = (req, res) => {
     }
   } catch (e) {
     logger.log("error", " admin controller => getInformations : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -110,17 +110,25 @@ exports.update = (req, res) => {
         const checkTokenId = jwt.verify(token, process.env.SECRET_KEY_TOKEN);
         if (checkTokenId.id == adminId) {
           const email = req.body.email;
-          const password = req.body.password;
+          let password = req.body.password;
           const name = req.body.name;
-          Admin.update(
-            { email, password, name },
-            { where: { id: adminId } }
-          ).then((success) => {
-            if (success == 1) {
-              res.status(200).send({ message: "Updated" });
-            } else {
-              res.status(500).send({ message: "Error: " });
-            }
+         
+           bcrypt.hash(password, 10)
+           .then(passwordHashed=>{
+              if(password != admin.password){
+                password = passwordHashed
+              }
+              Admin.update(
+                { email, password, name },
+                { where: { id: adminId } }
+              ).then((success) => {
+                if (success == 1) {
+                  res.status(200).send({ message: "Updated" });
+                } else {
+                  res.status(500).send({ message: "Error: " });
+                }
+            })
+          
           });
         } else {
           res.status(401).send({ message: "No authorized." });
@@ -131,6 +139,6 @@ exports.update = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " admin controller => update : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };

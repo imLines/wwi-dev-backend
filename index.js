@@ -5,9 +5,11 @@ const cors = require("cors");
 const port = 8005;
 const bodyParser = require("body-parser");
 
-app.use(cors({
-  origin: 'https://www.wwidev.tech'
-}));
+const corsOptions = {
+  origin: 'http://127.0.0.1:5173',
+}
+
+app.use(cors(corsOptions));
 
 
 app.use(bodyParser.json());

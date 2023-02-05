@@ -77,7 +77,7 @@ exports.createRecipient = async (req, res) => {
                 );
                 return res
                   .status(503)
-                  .send({ message: "Error when send email: " + e });
+                  .send({ message: "Error when send email"});
               }
             }
             sendMail();
@@ -86,7 +86,7 @@ exports.createRecipient = async (req, res) => {
     );
   } catch (e) {
     logger.log("error", "newsletter controller => createRecipent :" + e);
-    res.status(500).send({ message: "Error : " + e });
+    res.status(500).send({ message: "Server error. "});
   }
 };
 
@@ -121,7 +121,7 @@ exports.confirmEmail = (req, res) => {
     });
   } catch (e) {
     logger.log("error", "newsletter controller => confirmEmail : " + e);
-    res.status(500).send({ message: "Error : " + e });
+    res.status(500).send({ message: "Server error. "});
   }
 };
 
@@ -177,7 +177,7 @@ exports.createLetter = async (req, res) => {
                           throw new Error("Can't send mail : " + error);
                         } else {
                           console.log("Email sent: " + info.response);
-                          return res.status(200).send({ message: "Success" });
+                          return res.status(201).send({ message: "Success" });
                         }
                       }
                     );
@@ -197,6 +197,6 @@ exports.createLetter = async (req, res) => {
       });
   } catch (e) {
     logger.log("error", "newsletter controller => createLetter : " + e);
-    res.status(500).send({ err: "Error : " + e });
+    res.status(500).send({ message: "Server error. "});
   }
 };

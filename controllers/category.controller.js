@@ -12,14 +12,15 @@ exports.create = (req, res) => {
     res.status(200).send({ message: "Category was created." });
   } catch (e) {
     logger.log("error", " category controller => create : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
 exports.findOneCategory = (req, res) => {
   try {
     const categoryId = req.params.categoryId;
-    Category.findOne({ where: { id: categoryId } }).then((category) => {
+    Category.findOne({ where: { id: categoryId } })
+    .then((category) => {
       if (category) {
         res.status(200).json({ category });
       } else {
@@ -28,7 +29,7 @@ exports.findOneCategory = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " category controller => findOneCategory : " + e);
-    res.status(500).send({ message: "Error : " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -43,7 +44,7 @@ exports.findAllCategories = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " category controller => findAllCategories : " + e);
-    res.status(500).send({ message: "Error : " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -70,7 +71,7 @@ exports.updateCategory = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " category controller => updateCategory : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -81,6 +82,6 @@ exports.delete = (req, res) => {
     res.status(200).send({ message: "Success to delete." });
   } catch (e) {
     logger.log("error", " category controller => delete : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };

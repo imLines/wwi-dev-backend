@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   router.get("/authorization", accessRequest);
   router.post("/login", admin.login);
-  router.post("/create", checkToken, admin.create);
+  router.post("/create", admin.create);
   router.get("/info", checkToken, admin.getInformations);
   router.put("/update/:id", checkToken, admin.update);
 

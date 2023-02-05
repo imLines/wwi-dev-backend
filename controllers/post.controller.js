@@ -49,7 +49,7 @@ exports.create = (req, res) => {
                       appCache.del("allPostsWithCategory");
                       appCache.del("allPostsWithoutCategory");
                       appCache.del("allNoveltyPosts");
-                      return res.status(200).json({ post });
+                      return res.status(201).json({ post });
                     });
                   } else {
                     res.status(400).send({
@@ -103,7 +103,7 @@ exports.findAllPostsWithoutCategory = (req, res) => {
       "error",
       " post controller => findAllPostsWithoutCategory : " + e
     );
-    res.status(500).send({ message: "Error : " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -119,7 +119,7 @@ exports.findOnePost = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " post controller => findOnePost : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -135,7 +135,7 @@ exports.findByCategories = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " post controller => findByCategories : " + e);
-    res.status(500).send({ message: "Error : " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -172,7 +172,7 @@ exports.update = async (req, res) => {
     });
   } catch (e) {
     logger.log("error", " post controller => update : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -209,7 +209,7 @@ exports.novelty = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " post controller => novelty : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
 
@@ -228,6 +228,6 @@ exports.delete = (req, res) => {
     });
   } catch (e) {
     logger.log("error", " post controller => delete : " + e);
-    res.status(500).send({ message: "Error: " + e });
+    res.status(500).send({ message: "Server error for this operation. "});
   }
 };
