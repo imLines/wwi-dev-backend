@@ -6,10 +6,10 @@ const port = 8005;
 const bodyParser = require("body-parser");
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:5173',
+  origin: 'https://37.59.180.198',
 }
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 app.use(bodyParser.json());
