@@ -4,11 +4,22 @@ const logger = require("./config/logger.config");
 const cors = require("cors");
 const port = 8005;
 const bodyParser = require("body-parser");
+const fs = require('fs');
+const https = require('https');
 
+const optionsForSSL = {
+  key: fs.readFileSync('/etc/letsencrypt/live/www.wwidev.tech/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/www.wwidev.tech/fullchain.pem')
+};
 
 app.use(cors());
 
-
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://145.14.158.215');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Credentials', false);
+  next();
+});
 
 app.use(bodyParser.json());
 require("dotenv").config();
@@ -23,6 +34,8 @@ app.listen(port, () => {
   console.log("Fail to start server : ", e.message);
   logger.log("error", "index=>listen(running app) : " + e.message);
 });
+
+
 
 app.get('/', (req, res)=>{
   res.status(200).send({message: 'Connected'})
@@ -43,6 +56,11 @@ require("./routes/admin.routes")(app);
 require("./routes/post.routes")(app);
 require("./routes/category.routes")(app);
 require("./routes/newsletter.routes")(app);
+
+https.createServer(optionsForSSL, app).listen(port, () => {
+  console.log("App is running on port : " + port);
+  logger.log("info", "Server started on port " + port);
+});
 
 const { sequelize } = require("./models/model");
 sequelize.sync({ force: false, alter: false })
