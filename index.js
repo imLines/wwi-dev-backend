@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const fs = require('fs');
 const https = require('https');
 
-const optionsForSSL = {
+const credentials = {
   key: fs.readFileSync('/etc/letsencrypt/live/www.wwidev.tech/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/www.wwidev.tech/fullchain.pem')
 };
@@ -26,14 +26,14 @@ require("dotenv").config();
 
 app.set("view engine", "ejs");
 
-app.listen(port, () => {
-  console.log("App is running on port : " + port);
-  logger.log("info", "Server started on port " + port);
-})
-.on("error", (e) => {
-  console.log("Fail to start server : ", e.message);
-  logger.log("error", "index=>listen(running app) : " + e.message);
-});
+// app.listen(port, () => {
+//   console.log("App is running on port : " + port);
+//   logger.log("info", "Server started on port " + port);
+// })
+// .on("error", (e) => {
+//   console.log("Fail to start server : ", e.message);
+//   logger.log("error", "index=>listen(running app) : " + e.message);
+// });
 
 
 
@@ -57,10 +57,14 @@ require("./routes/post.routes")(app);
 require("./routes/category.routes")(app);
 require("./routes/newsletter.routes")(app);
 
-https.createServer(optionsForSSL, app).listen(port, () => {
-  console.log("App is running on port : " + port);
-  logger.log("info", "Server started on port " + port);
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(port, () => {
+	console.log('HTTPS Server running on port '+port);
+  logger.log('info', 'Success runnin https')
 });
+
+
 
 const { sequelize } = require("./models/model");
 sequelize.sync({ force: false, alter: false })
