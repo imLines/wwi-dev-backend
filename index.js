@@ -8,12 +8,7 @@ const bodyParser = require("body-parser");
 
 app.use(cors());
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://37.59.180.198');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Credentials', false);
-  next();
-});
+
 
 app.use(bodyParser.json());
 require("dotenv").config();

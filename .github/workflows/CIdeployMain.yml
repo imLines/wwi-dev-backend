@@ -21,4 +21,4 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
           source: '.'
-          target: '/var/www/wwidev-server'
+          target: '/var/www/wwidev.tech'
