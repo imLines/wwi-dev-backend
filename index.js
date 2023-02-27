@@ -35,7 +35,15 @@ app.set("view engine", "ejs");
 //   logger.log("error", "index=>listen(running app) : " + e.message);
 // });
 
-
+app.use((req, res, next) => {
+  if (req.secure) {
+    // La requête est déjà sécurisée en HTTPS, pas besoin de rediriger
+    next();
+  } else {
+    // Rediriger toutes les requêtes HTTP vers HTTPS
+    res.redirect(301, "https://" + req.headers.host + req.url);
+  }
+});
 
 app.get('/', (req, res)=>{
   res.status(200).send({message: 'Connected'})
