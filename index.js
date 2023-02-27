@@ -14,26 +14,18 @@ const credentials = {
 
 app.use(cors());
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://wwidev.tech');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Credentials', false);
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', 'https://wwidev.tech');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//   res.setHeader('Access-Control-Allow-Credentials', false);
+//   next();
+// });
 
 app.use(bodyParser.json());
 require("dotenv").config();
 
 app.set("view engine", "ejs");
 
-// app.listen(port, () => {
-//   console.log("App is running on port : " + port);
-//   logger.log("info", "Server started on port " + port);
-// })
-// .on("error", (e) => {
-//   console.log("Fail to start server : ", e.message);
-//   logger.log("error", "index=>listen(running app) : " + e.message);
-// });
 
 app.use((req, res, next) => {
   if (req.secure) {
