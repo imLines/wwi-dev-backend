@@ -8,8 +8,8 @@ const fs = require('fs');
 const https = require('https');
 
 const credentials = {
-  key: fs.readFileSync('/etc/letsencrypt/live/www.wwidev.tech/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/www.wwidev.tech/fullchain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/wwidev.tech/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/wwidev.tech/fullchain.pem')
 };
 
 app.use(cors());
