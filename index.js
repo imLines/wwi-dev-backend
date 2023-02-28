@@ -12,10 +12,11 @@ const credentials = {
   cert: fs.readFileSync('/etc/letsencrypt/live/wwidev.tech/fullchain.pem')
 };
 
+
 app.use(cors());
 
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.wwidev.tech/');
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.wwidev.tech');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Credentials', false);
   next();
