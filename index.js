@@ -16,7 +16,7 @@ const credentials = {
 app.use(cors());
 
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.wwidev.tech');
+  res.setHeader('Access-Control-Allow-Origin', 'https://wwidev.tech');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Credentials', false);
   next();
